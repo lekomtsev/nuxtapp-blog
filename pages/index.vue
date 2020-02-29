@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>123</p>
+    <p>123 Body</p>
   </div>
 </template>
 
