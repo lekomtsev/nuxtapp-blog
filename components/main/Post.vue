@@ -4,7 +4,7 @@
     :body-style="{padding: 0}"
     class="post"
   >
-    <header class="post__header" slot="header">
+    <header slot="header" class="post__header">
       <h3>Post title</h3>
       <small>
         <i class="el-icon-time" />
@@ -30,7 +30,8 @@
 export default {
   methods: {
     openPost () {
-      // console.log('open post')
+      const id = 'test-id'
+      this.$router.push(`/post/${id}`)
     }
   }
 }
