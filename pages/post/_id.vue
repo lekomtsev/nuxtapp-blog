@@ -29,7 +29,16 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, molestiae?</p>
         </main>
         <footer>
-          <p>Comment</p>
+          <div v-if="true" class="comments comments--exist">
+            <app-comment
+              v-for="comment in 4"
+              :key="comment"
+              :comment="comment"
+            />
+          </div>
+          <div v-else class="comments comments--none">
+            <p>Комментариев нет</p>
+          </div>
         </footer>
       </article>
     </el-col>
@@ -37,14 +46,23 @@
 </template>
 
 <script>
+import AppComment from '@/components/main/Comment'
+
 export default {
   validate ({ params }) {
     return Boolean(params.id)
+  },
+  components: {
+    AppComment
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.comments {
+  padding-top: 21px;
+}
+
 .post__header {
   margin-bottom: 30px;
 }
