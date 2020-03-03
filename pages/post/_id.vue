@@ -29,7 +29,7 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, molestiae?</p>
         </main>
         <footer>
-          <div v-if="true" class="comments comments--exist">
+          <div v-if="false" class="comments comments--exist">
             <app-comment
               v-for="comment in 4"
               :key="comment"
@@ -39,6 +39,7 @@
           <div v-else class="comments comments--none">
             <p>Комментариев нет</p>
           </div>
+          <app-comment-form />
         </footer>
       </article>
     </el-col>
@@ -47,13 +48,14 @@
 
 <script>
 import AppComment from '@/components/main/Comment'
+import AppCommentForm from '@/components/main/CommentForm'
 
 export default {
   validate ({ params }) {
     return Boolean(params.id)
   },
   components: {
-    AppComment
+    AppComment, AppCommentForm
   }
 }
 </script>

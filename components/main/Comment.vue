@@ -15,7 +15,12 @@
 
 <script>
 export default {
-  props: ['comment']
+  props: {
+    comment: {
+      type: Object,
+      default: null
+    }
+  }
 }
 </script>
 
