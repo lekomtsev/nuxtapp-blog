@@ -19,6 +19,7 @@
     </el-form-item>
     <el-form-item>
       <el-button
+        :loading="loading"
         native-type="submit"
         type="primary"
         round
@@ -33,6 +34,7 @@
 export default {
   data () {
     return {
+      loading: false,
       controls: {
         name: '',
         text: ''
@@ -52,7 +54,23 @@ export default {
     onSubmit (form) {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          alert('submit!')
+          this.loading = true
+
+          // const formData = {
+          //   name: this.controls.name,
+          //   text: this.controls.text,
+          //   postId: ''
+          // }
+
+          try {
+            setTimeout(() => {
+              this.$emit('created')
+              this.$message.success('Комментарий добавлен')
+            }, 1000)
+          } catch (e) {
+            console.log(e)
+            this.loading = false
+          }
         } else {
           console.log('error submit!!')
           return false
