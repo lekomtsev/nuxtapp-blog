@@ -1,3 +1,9 @@
+export const mutations = {
+  remove (state, id) {
+    console.log('remove form mutations')
+  }
+}
+
 export const actions = {
   fetchAdmin () {
     return new Promise((resolve) => {
@@ -9,5 +15,10 @@ export const actions = {
         ])
       }, 1000)
     })
+  },
+
+  remove ({ commit }, id) {
+    console.log('remove form actions', id)
+    commit('remove', id)
   }
 }

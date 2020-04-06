@@ -36,9 +36,7 @@ export const actions = {
   createUser ({ commit }, formData) {
     try {
       console.log('createUser', formData)
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }
 }
 
