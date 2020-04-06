@@ -3,8 +3,8 @@
     ref="form"
     :model="controls"
     :rules="rules"
-    @submit.native.prevent="onSubmit"
     style="max-width: 600px;"
+    @submit.native.prevent="onSubmit"
   >
     <h2>Создать пользователя</h2>
     <el-form-item label="Логин" prop="login">
