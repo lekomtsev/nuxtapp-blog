@@ -1,5 +1,5 @@
 export const state = () => ({
-  token: null
+  token: true
 })
 
 export const mutations = {
@@ -31,6 +31,14 @@ export const actions = {
 
   logout ({ commit }) {
     commit('clearToken')
+  },
+
+  createUser ({ commit }, formData) {
+    try {
+      console.log('createUser', formData)
+    } catch (error) {
+
+    }
   }
 }
 
