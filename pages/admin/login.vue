@@ -56,7 +56,7 @@ export default {
     }
   },
   methods: {
-    onSubmit (form) {
+    onSubmit () {
       this.$refs.form.validate(async (valid) => {
         if (valid) {
           this.loading = true
@@ -69,8 +69,8 @@ export default {
 
             await this.$store.dispatch('auth/login', formData)
             await this.$router.push('/admin')
-          } catch (e) {
-            console.log(e, 'catch')
+            this.loading = false
+          } catch (error) {
             this.loading = false
           }
         } else {
