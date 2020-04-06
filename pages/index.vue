@@ -16,6 +16,7 @@ export default {
   components: {
     AppPost
   },
+
   head () {
     return {
       title: 'Главная'

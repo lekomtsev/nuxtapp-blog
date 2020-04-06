@@ -4,11 +4,13 @@
   </div>
 </template>
 
-<style>
-  .empty-layout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+<style lang="scss" scoped>
+
+.empty-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 </style>

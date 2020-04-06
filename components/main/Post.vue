@@ -5,7 +5,9 @@
     class="post"
   >
     <header slot="header" class="post__header">
-      <h3>Post title</h3>
+      <h3>
+        Post title
+      </h3>
       <small>
         <i class="el-icon-time" />
         {{ new Date().toLocaleString() }}

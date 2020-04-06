@@ -57,23 +57,20 @@ export default {
   },
   methods: {
     onSubmit (form) {
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(async (valid) => {
         if (valid) {
           this.loading = true
 
-          // const formData = {
-          //   name: this.controls.name,
-          //   text: this.controls.text,
-          //   postId: ''
-          // }
-
           try {
-            setTimeout(() => {
-              this.$emit('created')
-              this.$message.success('Комментарий добавлен')
-            }, 1000)
+            const formData = {
+              login: this.controls.login,
+              password: this.controls.password
+            }
+
+            await this.$store.dispatch('auth/login', formData)
+            await this.$router.push('/admin')
           } catch (e) {
-            console.log(e)
+            console.log(e, 'catch')
             this.loading = false
           }
         } else {
@@ -82,6 +79,7 @@ export default {
         }
       })
     },
+
     resetForm (form) {
       this.$refs[form].resetFields()
     }
@@ -89,20 +87,22 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  .login {
-    width: 100%;
-    max-width: 500px;
-  }
+<style lang="scss" scoped>
 
-  .login__button {
-    margin-top: 21px;
-    width: 100%;
-  }
+.login {
+  width: 100%;
+  max-width: 500px;
+}
 
-  .el-form-item {
-    &:last-child {
-      margin-bottom: 0;
-    }
+.login__button {
+  margin-top: 21px;
+  width: 100%;
+}
+
+.el-form-item {
+  &:last-child {
+    margin-bottom: 0;
   }
+}
+
 </style>

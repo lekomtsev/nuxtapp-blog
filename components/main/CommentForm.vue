@@ -50,6 +50,7 @@ export default {
       }
     }
   },
+
   methods: {
     onSubmit (form) {
       this.$refs.form.validate((valid) => {
