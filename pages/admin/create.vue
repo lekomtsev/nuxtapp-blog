@@ -38,6 +38,24 @@
         <vue-markdown :source="controls.text" />
       </el-dialog>
       <el-form-item>
+        <el-upload
+          ref="upload"
+          style="margin-bottom: 21px;"
+          drag
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :auto-upload="false"
+          :on-change="handleImageChange"
+        >
+          <i class="el-icon-upload" />
+          <div class="el-upload__text">
+            Перетащите изображение <em>или нажмите</em>
+          </div>
+          <div slot="tip" class="el-upload__tip">
+            Файлы с расширением jpg/png не более 500kb
+          </div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item>
         <el-button
           :loading="loading"
           native-type="submit"
@@ -59,6 +77,7 @@ export default {
 
   data () {
     return {
+      image: null,
       previewContent: false,
       loading: false,
       controls: {
@@ -79,24 +98,34 @@ export default {
   methods: {
     onSubmit () {
       this.$refs.form.validate(async (valid) => {
-        if (valid) {
+        if (valid && this.image) {
           this.loading = true
 
           const formData = {
             title: this.controls.title,
-            text: this.controls.text
+            text: this.controls.text,
+            image: this.image
           }
 
           try {
             await this.$store.dispatch('post/create', formData)
             this.controls.title = ''
             this.controls.text = ''
+            this.image = null
+            this.$refs.upload.clearFiles()
             this.$message.success('Пост успешно создан!')
           } catch (error) {} finally {
             this.loading = false
           }
+        } else {
+          this.$message.warning('Форма не валидна')
         }
       })
+    },
+
+    handleImageChange (file, fileList) {
+      console.log(file, fileList, 'handleImageChange')
+      this.image = file.raw
     }
   }
 }

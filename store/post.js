@@ -12,7 +12,7 @@ export const mutations = {
   update (state, { id, text }) {
     console.log('update form mutations')
   },
-  create (state, { title, text }) {
+  create (state, { title, text, image }) {
     console.log('create form mutations')
   }
 }
@@ -42,11 +42,20 @@ export const actions = {
     commit('update', formData)
   },
 
-  create ({ commit }, formData) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve()
-      }, 1000)
-    })
+  create ({ commit }, { title, text, image }) {
+    try {
+      const fd = new FormData()
+      fd.append('title', title)
+      fd.append('text', text)
+      fd.append('image', image, image.name)
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve()
+        }, 1000)
+      })
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
   }
 }
