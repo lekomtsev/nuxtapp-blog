@@ -10,7 +10,10 @@ export const mutations = {
   },
 
   update (state, { id, text }) {
-    console.log('remove form mutations')
+    console.log('update form mutations')
+  },
+  create (state, { title, text }) {
+    console.log('create form mutations')
   }
 }
 
@@ -23,11 +26,6 @@ export const actions = {
     })
   },
 
-  remove ({ commit }, id) {
-    console.log('remove form actions', id)
-    commit('remove', id)
-  },
-
   fetchAdminById ({ commit }, id) {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -36,7 +34,19 @@ export const actions = {
     })
   },
 
+  remove ({ commit }, id) {
+    commit('remove', id)
+  },
+
   update ({ commit }, formData) {
     commit('update', formData)
+  },
+
+  create ({ commit }, formData) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, 1000)
+    })
   }
 }

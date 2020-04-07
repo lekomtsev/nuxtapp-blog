@@ -107,7 +107,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.post-wrapper {
+.admin-wrapper {
   max-width: 600px;
 
   .el-breadcrumb {
