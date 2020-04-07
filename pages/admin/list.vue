@@ -61,13 +61,8 @@ export default {
   layout: 'admin',
   middleware: 'admin-auth',
 
-  asyncData ({ store }) {
-    // const posts = await store.dispatch('post/fetchAdmin')
-    const posts = [
-      { title: 'Post 1', date: new Date(), views: 22, comments: [1, 2], _id: Math.random() },
-      { title: 'Post 2', date: new Date(), views: 2, comments: [1, 2, 3, 4], _id: Math.random() },
-      { title: 'Post 3', date: new Date(), views: 33, comments: [1, 2, 3], _id: Math.random() }
-    ]
+  async asyncData ({ store }) {
+    const posts = await store.dispatch('post/fetchAdmin')
     return { posts }
   },
 
