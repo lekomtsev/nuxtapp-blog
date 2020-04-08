@@ -68,8 +68,9 @@ export default {
         this.$message.success('Вы покинули личный кабинет')
         break
 
-      default:
-        this.$router.push('/')
+      case 'session':
+        this.$message.warning('Время сессии истекло, войдите заново')
+        break
     }
   },
 
