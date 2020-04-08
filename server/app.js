@@ -5,8 +5,6 @@ const authRoutes = require('./routes/auth.routes')
 const keys = require('./keys')
 const app = express()
 
-console.log(keys.MONGO_URI)
-
 mongoose.connect(keys.MONGO_URI)
   .then(() => console.log('MongoDb connected...'))
   .catch(error => console.error(error))
