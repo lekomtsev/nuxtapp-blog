@@ -7,12 +7,12 @@ const storage = multer.diskStorage({
     cb(null, path.resolve(__dirname, '../..', 'static'))
   },
   filename (req, file, cb) {
-    cb(null, `${file.originalname}-${moment().format('DDMMYYYY-HHmmss_SSS')}`)
+    cb(null, `${moment().format('DDMMYYYY-HHmmss_SSS')}-${file.originalname}`)
   }
 })
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
     cb(null, true)
   } else {
     cb(null, false)
@@ -20,5 +20,5 @@ const fileFilter = (req, file, cb) => {
 }
 
 module.exports = multer({
-  storage, fileFilter, limits: { fileSize: 1024 * 1024 * 5 }
+  storage, fileFilter, limits: { fileSize: 1024 * 1024 * 50 }
 })

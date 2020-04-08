@@ -2,6 +2,7 @@
   <div class="admin-wrapper">
     <el-form
       ref="form"
+      enctype="multipart/form-data"
       :model="controls"
       :rules="rules"
       @submit.native.prevent="onSubmit"
@@ -9,9 +10,7 @@
       <h1>Создать новый пост</h1>
 
       <el-form-item label="Введите название поста" prop="title">
-        <el-input
-          v-model.trim="controls.title"
-        />
+        <el-input v-model="controls.title" />
       </el-form-item>
       <el-form-item label="Текст в формате .md или .html" prop="text">
         <el-input

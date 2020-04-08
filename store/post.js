@@ -12,6 +12,7 @@ export const mutations = {
   update (state, { id, text }) {
     console.log('update form mutations')
   },
+
   create (state, { title, text, image }) {
     console.log('create form mutations')
   }
@@ -26,14 +27,6 @@ export const actions = {
     })
   },
 
-  fetchAdminById ({ commit }, id) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(posts.find(p => p._id === id))
-      }, 1000)
-    })
-  },
-
   remove ({ commit }, id) {
     commit('remove', id)
   },
@@ -42,20 +35,25 @@ export const actions = {
     commit('update', formData)
   },
 
-  create ({ commit }, { title, text, image }) {
+  async create ({ commit }, { title, text, image }) {
     try {
       const fd = new FormData()
       fd.append('title', title)
       fd.append('text', text)
       fd.append('image', image, image.name)
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve()
-        }, 1000)
-      })
+
+      return await this.$axios.$post('/api/post/admin', fd)
     } catch (error) {
       commit('setError', error, { root: true })
       throw error
     }
+  },
+
+  fetchAdminById ({ commit }, id) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(posts.find(p => p._id === id))
+      }, 1000)
+    })
   }
 }
