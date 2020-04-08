@@ -1,6 +1,6 @@
 <template>
   <div class="post-wrapper">
-    <el-breadcrumb separator="/">
+    <el-breadcrumb separator="/" style="margin-bottom: 30px;">
       <el-breadcrumb-item to="/admin/post">
         Посты
       </el-breadcrumb-item>
@@ -12,10 +12,9 @@
       :rules="rules"
       @submit.native.prevent="onSubmit"
     >
-      <!--<h2>Вход </h2>-->
       <el-form-item label="Текст в формате .md или .html" prop="text">
         <el-input
-          v-model.trim="controls.text"
+          v-model="controls.text"
           type="textarea"
           resize="none"
           :rows="10"
@@ -74,6 +73,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.controls.text = this.post.text
+  },
+
   methods: {
     onSubmit () {
       this.$refs.form.validate(async (valid) => {
@@ -89,6 +92,7 @@ export default {
             await this.$store.dispatch('post/update', formData)
             this.$message.success('Пост обновлен')
             this.loading = false
+            await this.$router.push('/admin/list')
           } catch (error) {
             this.loading = false
           }

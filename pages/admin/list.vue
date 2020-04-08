@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="posts"
+    :data="allPosts"
     style="width: 100%"
   >
     <el-table-column
@@ -63,18 +63,12 @@ export default {
 
   async asyncData ({ store }) {
     const posts = await store.dispatch('post/fetchAdmin')
-    return { posts }
-  },
-
-  data () {
-    return {
-      // posts: ''
-    }
+    const allPosts = posts.data
+    return { allPosts }
   },
 
   methods: {
     open (id) {
-      console.log('open', id)
       this.$router.push(`/admin/post/${id}`)
     },
 
@@ -87,7 +81,7 @@ export default {
         })
 
         await this.$store.dispatch('post/remove', id)
-        this.posts = this.posts.filter(p => p._id !== id)
+        this.allPosts = this.allPosts.filter(p => p._id !== id)
         this.$message.success('Пост удален')
       } catch (error) {}
     }

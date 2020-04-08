@@ -1,8 +1,3 @@
-const posts = [
-  { title: 'Post 1', date: new Date(), views: 22, comments: [1, 2], _id: '1' },
-  { title: 'Post 2', date: new Date(), views: 2, comments: [1, 2, 3, 4], _id: '2' },
-  { title: 'Post 3', date: new Date(), views: 33, comments: [1, 2, 3], _id: '3' }
-]
 
 export const mutations = {
   remove (state, id) {
@@ -19,20 +14,31 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchAdmin () {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(posts)
-      }, 1000)
-    })
+  async fetchAdmin ({ commit }) {
+    try {
+      return await this.$axios.get('/api/post/admin')
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
   },
 
-  remove ({ commit }, id) {
-    commit('remove', id)
+  async remove ({ commit }, id) {
+    try {
+      return await this.$axios.$delete(`/api/post/admin/${id}`)
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
   },
 
-  update ({ commit }, formData) {
-    commit('update', formData)
+  async update ({ commit }, { id, text }) {
+    try {
+      return await this.$axios.$put(`/api/post/admin/${id}`, { text })
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
   },
 
   async create ({ commit }, { title, text, image }) {
@@ -49,11 +55,12 @@ export const actions = {
     }
   },
 
-  fetchAdminById ({ commit }, id) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(posts.find(p => p._id === id))
-      }, 1000)
-    })
+  async fetchAdminById ({ commit }, id) {
+    try {
+      return await this.$axios.$get(`/api/post/admin/${id}`)
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
   }
 }

@@ -123,7 +123,6 @@ export default {
     },
 
     handleImageChange (file, fileList) {
-      console.log(file, fileList, 'handleImageChange')
       this.image = file.raw
     }
   }
