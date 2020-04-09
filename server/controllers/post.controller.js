@@ -70,3 +70,24 @@ module.exports.addView = async (req, res) => {
     res.status(500).json(error)
   }
 }
+
+module.exports.getAnalytics = async (req, res) => {
+  try {
+    const posts = await Post.find()
+    const labels = posts.map(post => post.title)
+
+    const jsonForChart = {
+      comments: {
+        labels,
+        data: posts.map(post => post.comments.length)
+      },
+      views: {
+        labels,
+        data: posts.map(post => post.views)
+      }
+    }
+    res.json(jsonForChart)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
