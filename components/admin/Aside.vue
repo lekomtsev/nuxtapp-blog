@@ -4,6 +4,10 @@
     :default-active="$route.path"
     class="sidebar__menu"
   >
+    <el-menu-item index="/">
+      <i class="el-icon-location" />
+      <span>На главную</span>
+    </el-menu-item>
     <el-menu-item index="/admin">
       <i class="el-icon-location" />
       <span>Аналитика</span>
