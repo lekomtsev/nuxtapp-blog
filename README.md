@@ -1,6 +1,7 @@
 # nuxtapp-blog
 
-> My simple nuxt fullstack blog
+> Простое приложение SSR, котрое создавалось в рамках обучения Vue + Nuxt 
+Пример который получился в рамках обучения [jsmaster-ssr-blog.herokuapp.com](https://jsmaster-ssr-blog.herokuapp.com/)
 
 ## Build Setup
 
