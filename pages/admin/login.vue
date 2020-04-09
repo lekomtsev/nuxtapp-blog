@@ -102,6 +102,12 @@ export default {
     resetForm (form) {
       this.$refs[form].resetFields()
     }
+  },
+
+  head () {
+    return {
+      title: 'Вход в панель администратора'
+    }
   }
 }
 </script>

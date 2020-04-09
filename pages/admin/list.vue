@@ -87,6 +87,12 @@ export default {
         this.$message.success('Пост удален')
       } catch (error) {}
     }
+  },
+
+  head () {
+    return {
+      title: 'Все посты и записи'
+    }
   }
 }
 </script>

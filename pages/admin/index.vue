@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <h1>Аналитика по постам</h1>
+      <h1>{{ title }}</h1>
     </el-header>
     <el-main>
       <el-row>
@@ -37,6 +37,18 @@ export default {
   async asyncData ({ store }) {
     const { views, comments } = await store.dispatch('post/getAnalytics')
     return { views, comments }
+  },
+
+  data () {
+    return {
+      title: 'Аналитика по постам'
+    }
+  },
+
+  head () {
+    return {
+      title: this.title
+    }
   }
 }
 </script>

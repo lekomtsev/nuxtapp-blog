@@ -83,6 +83,12 @@ export default {
       this.post.comments.unshift(comment)
       this.canAddComment = false
     }
+  },
+
+  head () {
+    return {
+      title: this.post.title
+    }
   }
 }
 </script>

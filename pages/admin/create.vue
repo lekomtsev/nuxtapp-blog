@@ -7,7 +7,7 @@
       :rules="rules"
       @submit.native.prevent="onSubmit"
     >
-      <h1>Создать новый пост</h1>
+      <h1>{{ title }}</h1>
 
       <el-form-item label="Введите название поста" prop="title">
         <el-input v-model="controls.title" />
@@ -76,6 +76,7 @@ export default {
 
   data () {
     return {
+      title: 'Создать новый пост',
       image: null,
       previewContent: false,
       loading: false,
@@ -124,6 +125,12 @@ export default {
 
     handleImageChange (file, fileList) {
       this.image = file.raw
+    }
+  },
+
+  head () {
+    return {
+      title: this.title
     }
   }
 }

@@ -25,7 +25,7 @@ export default {
 
   head () {
     return {
-      title: 'Главная'
+      title: `Главная | ${process.env.appName}`
     }
   }
 }

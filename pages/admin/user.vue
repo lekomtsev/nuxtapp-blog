@@ -6,7 +6,7 @@
     style="max-width: 600px;"
     @submit.native.prevent="onSubmit"
   >
-    <h2>Создать пользователя</h2>
+    <h2>{{ title }}</h2>
     <el-form-item label="Логин" prop="login">
       <el-input v-model.trim="controls.login" />
     </el-form-item>
@@ -37,6 +37,7 @@ export default {
 
   data () {
     return {
+      title: 'Создать пользователя',
       loading: false,
       controls: {
         login: '',
@@ -80,6 +81,12 @@ export default {
           return false
         }
       })
+    }
+  },
+
+  head () {
+    return {
+      title: this.title
     }
   }
 }
