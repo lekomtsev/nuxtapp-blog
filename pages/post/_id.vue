@@ -42,6 +42,7 @@
           </div>
           <app-comment-form
             v-if="canAddComment"
+            :post-id="post._id"
             @created="createCommentHandler"
           />
         </footer>
@@ -78,7 +79,8 @@ export default {
   },
 
   methods: {
-    createCommentHandler () {
+    createCommentHandler (comment) {
+      this.post.comments.unshift(comment)
       this.canAddComment = false
     }
   }
