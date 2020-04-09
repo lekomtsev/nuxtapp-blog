@@ -92,4 +92,3 @@ sw.*
 # Static files
 static
 server/keys/keys.dev.js
-server/keys/keys.prod.js
