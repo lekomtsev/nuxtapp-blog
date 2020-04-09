@@ -14,6 +14,33 @@ export const mutations = {
 }
 
 export const actions = {
+  async fetch ({ commit }) {
+    try {
+      return await this.$axios.$get('/api/post')
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
+  },
+
+  async fetchById ({ commit }, id) {
+    try {
+      return await this.$axios.$get(`/api/post/${id}`)
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
+  },
+
+  async addView ({ commit }, { _id, views }) {
+    try {
+      return await this.$axios.$put(`/api/post/add/view/${_id}`, { views })
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
+  },
+
   async fetchAdmin ({ commit }) {
     try {
       return await this.$axios.get('/api/post/admin')

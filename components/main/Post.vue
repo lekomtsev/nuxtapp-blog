@@ -5,24 +5,25 @@
     class="post"
   >
     <header slot="header" class="post__header">
-      <h3>
-        Post title
-      </h3>
+      <h3>{{ post.title }}</h3>
       <small>
         <i class="el-icon-time" />
-        {{ new Date().toLocaleString() }}
+        {{ new Date(post.date).toLocaleString() }}
       </small>
     </header>
     <div class="post__body">
-      <img class="post__image" src="https://www.1obl.ru/upload/iblock/3d4/berlin.png" alt="alt">
+      <img class="post__image" :src="post.imageUrl" :alt="post.title">
     </div>
     <footer class="post__footer">
-      <el-button round @click="openPost">
+      <el-button
+        round
+        @click="openPost"
+      >
         Открыть статью
       </el-button>
       <span>
         <i class="el-icon-message" />
-        12
+        {{ post.comments.length }}
       </span>
     </footer>
   </el-card>
@@ -30,9 +31,17 @@
 
 <script>
 export default {
+  props: {
+    post: {
+      type: Object,
+      required: true,
+      default: null
+    }
+  },
+
   methods: {
     openPost () {
-      const id = 'test-id'
+      const id = this.post._id
       this.$router.push(`/post/${id}`)
     }
   }

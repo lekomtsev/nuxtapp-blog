@@ -4,7 +4,7 @@
       <article class="post">
         <header class="post__header">
           <div class="post__title">
-            <h1>Post title</h1>
+            <h1>{{ post.title }}</h1>
             <nuxt-link to="/">
               <i class="el-icon-back" />
               На главную
@@ -13,26 +13,27 @@
           <div class="post__info">
             <small>
               <i class="el-icon-time" />
-              {{ new Date().toLocaleString() }}
+              {{ new Date(post.date).toLocaleString() }}
             </small>
             <small>
               <i class="el-icon-view" />
-              42
+              {{ post.views }}
             </small>
           </div>
         </header>
         <main class="post__content">
-          <img class="post__image" src="https://www.1obl.ru/upload/iblock/3d4/berlin.png" alt="alt">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, molestiae?</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, molestiae?</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, molestiae?</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, molestiae?</p>
+          <img
+            class="post__image"
+            :src="post.imageUrl"
+            :alt="post.title"
+          >
+          <vue-markdown :source="post.text" />
         </main>
         <footer>
-          <div v-if="true" class="comments comments--exist">
+          <div v-if="post.comments.length" class="comments comments--exist">
             <app-comment
-              v-for="comment in 4"
-              :key="comment"
+              v-for="(comment, i) in post.comments"
+              :key="i"
               :comment="comment"
             />
           </div>
@@ -57,14 +58,25 @@ export default {
   components: {
     AppComment, AppCommentForm
   },
+
   validate ({ params }) {
     return Boolean(params.id)
   },
+
+  async asyncData ({ store, params }) {
+    const post = await store.dispatch('post/fetchById', params.id)
+    await store.dispatch('post/addView', post)
+    return {
+      post: { ...post, views: ++post.views }
+    }
+  },
+
   data () {
     return {
       canAddComment: true
     }
   },
+
   methods: {
     createCommentHandler () {
       this.canAddComment = false
@@ -75,7 +87,7 @@ export default {
 
 <style lang="scss" scoped>
 .comments {
-  padding-top: 21px;
+  margin-top: 30px;
 }
 
 .post__header {
@@ -106,5 +118,9 @@ export default {
   p + p {
     margin-top: 12px;
   }
+}
+
+.el-form {
+  margin-top: 40px;
 }
 </style>
