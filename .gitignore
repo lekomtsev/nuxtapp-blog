@@ -90,5 +90,4 @@ sw.*
 *.swp
 
 # Static files
-static
 server/keys/keys.dev.js
