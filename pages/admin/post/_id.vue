@@ -23,7 +23,9 @@
       <el-form-item>
         <small style="margin-right: 30px;">
           <i class="el-icon-time" />
-          <span style="margin-left: 10px">{{ new Date(post.date).toLocaleString() }}</span>
+          <span style="margin-left: 10px">
+            {{ post.date | date('date') }}
+          </span>
         </small>
         <small>
           <i class="el-icon-view" />
