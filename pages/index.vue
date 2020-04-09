@@ -23,6 +23,10 @@ export default {
     return { posts }
   },
 
+  mounted () {
+    console.log('App running...')
+  },
+
   head () {
     return {
       title: `Главная | ${process.env.appName}`
